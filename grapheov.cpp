@@ -1,10 +1,11 @@
 #include "grapheov.h"
-#include "grapheONV.h"
+#include"grapheonv.h"
+#include<limits.h>
 using namespace std;
 
-grapheOV::grapheOV() : graphe{}, d_cout{nullptr}
+grapheov::grapheov() : graphe{}, d_cout{nullptr}
 {}
-grapheOV::grapheOV(int *fs, int *aps, int **couts) : graphe{fs, aps}{
+grapheov::grapheov(int *fs, int *aps, int **couts) : graphe{fs, aps}{
     if (fs == nullptr || aps == nullptr) {
             d_cout = nullptr;
             return;
@@ -21,7 +22,7 @@ grapheOV::grapheOV(int *fs, int *aps, int **couts) : graphe{fs, aps}{
                 d_cout[i][j] = couts[i][j];
 }
 
-grapheOV::~grapheOV(){
+grapheov::~grapheov(){
     int n = nbSommet();
     if (n != 0)
         for (int i = 0; i <= n; ++i)
@@ -29,7 +30,7 @@ grapheOV::~grapheOV(){
     delete d_cout;
 }
 
-void grapheOV::afficher() const{
+void grapheov::afficher() const{
     graphe::afficher();
     int n = nbSommet();
     std::cout<< endl;
@@ -47,7 +48,7 @@ void grapheOV::afficher() const{
 }
 
 
-void grapheOV::ajoutArc(int s1, int s2, int c)
+void grapheov::ajoutArc(int s1, int s2, int c)
 {
     graphe::ajoutArc(s1, s2, 0);
 
@@ -58,7 +59,7 @@ void grapheOV::ajoutArc(int s1, int s2, int c)
     d_cout[s1][s2] = c;
 }
 
-void grapheOV::supprArc(int s1, int s2)
+void grapheov::supprArc(int s1, int s2)
 {
     graphe::supprArc(s1, s2);
 
@@ -69,7 +70,7 @@ void grapheOV::supprArc(int s1, int s2)
     d_cout[s1][s2] = INT_MAX;
 }
 
-void grapheOV::ajoutSommet()
+void grapheov::ajoutSommet()
 {
     int n = nbSommet();
     graphe::ajoutSommet();
@@ -108,7 +109,7 @@ void grapheOV::ajoutSommet()
     setCout(couts);
 }
 
-void grapheOV::supprSommet(int s)
+void grapheov::supprSommet(int s)
 {
     graphe::supprSommet(s);
 
@@ -155,7 +156,7 @@ void grapheOV::supprSommet(int s)
     setCout(couts);
 }
 
-int** grapheOV::Cout() const
+int** grapheov::Cout() const
 {
     if (d_cout == nullptr)
         return nullptr;
@@ -175,7 +176,7 @@ int** grapheOV::Cout() const
     return c;
 }
 
-bool grapheOV::setCout(int **couts){
+bool grapheov::setCout(int **couts){
     if (couts == nullptr)
     {
         delete d_cout;
@@ -204,7 +205,7 @@ bool grapheOV::setCout(int **couts){
     return true;
 }
 
-int* grapheOV::nb_pred() const{
+int* grapheov::nb_pred() const{
     int n = d_aps[0];
     int *ddi = new int[n + 1];
 
@@ -218,7 +219,7 @@ int* grapheOV::nb_pred() const{
     return ddi;
 }
 
-int* grapheOV::dist(int s) const
+int* grapheov::dist(int s) const
 {
     int n = d_aps[0], v = 0, t = 0, q = 1, p = 1;
     int *d = new int[n + 1];
@@ -255,7 +256,7 @@ int* grapheOV::dist(int s) const
     return d;
 }
 
-int* grapheOV::rang(int *&pilch, int *&prem) const
+int* grapheov::rang(int *&pilch, int *&prem) const
 {
     int n = d_aps[0];
     int s, k, t, h;
@@ -311,7 +312,7 @@ int* grapheOV::rang(int *&pilch, int *&prem) const
     return rang;
 }
 
-int* grapheOV::fs2fp() const
+int* grapheov::fs2fp() const
 {
     int *ddi = nb_pred();
     int n = ddi[0], m = d_fs[0];
@@ -344,7 +345,7 @@ int* grapheOV::fs2fp() const
     return fp;
 }
 
-int grapheOV::dmin(bool* ins, int *d) const
+int grapheov::dmin(bool* ins, int *d) const
 {
     int n = d_aps[0];
     int s = -1;
@@ -363,7 +364,7 @@ int grapheOV::dmin(bool* ins, int *d) const
     return s;
 }
 
-bool grapheOV::Dijkstra(int s, int* &d, int* &pere) const
+bool grapheov::Dijkstra(int s, int* &d, int* &pere) const
 {
     int MAXPOIDS = INT_MAX;
     int n = d_aps[0];
@@ -433,7 +434,7 @@ bool grapheOV::Dijkstra(int s, int* &d, int* &pere) const
 
 
 
-bool grapheOV::circuit(int* fs, int* aps, int* statut, int s)
+bool grapheov::circuit(int* fs, int* aps, int* statut, int s)
 {
     statut[s] = 1;
     for (int i = aps[s], k; (k = fs[i])>0; i++)
@@ -453,7 +454,7 @@ bool grapheOV::circuit(int* fs, int* aps, int* statut, int s)
 
 }
 
-int* grapheOV::det_pred() const
+int* grapheov::det_pred() const
 {
     int *pilch, *prem;
     int* rg = rang(pilch, prem);
@@ -473,7 +474,7 @@ int* grapheOV::det_pred() const
 }
 
 //si che[0]==0 => pas de chemin
-int* grapheOV::chemin(int s) const
+int* grapheov::chemin(int s) const
 {
 
     int* pred = det_pred();
@@ -498,9 +499,9 @@ int* grapheOV::chemin(int s) const
     return che;
 }
 
-int* grapheOV::fs2fp_(int *fs)
+int* grapheov::fs2fp_(int *fs)
 {
-    grapheONV g(fs, graphe::fs2aps(fs));
+    grapheonv g(fs, graphe::fs2aps(fs));
     int *ddi = g.nb_pred();
     int n = ddi[0], m = fs[0];
     int *app = new int[n + 1],
@@ -533,7 +534,7 @@ int* grapheOV::fs2fp_(int *fs)
 
 }
 
-void grapheOV::ordonnancement(int *&fs, int*&tab)
+void grapheov::ordonnancement(int *&fs, int*&tab)
 {
     int n = d_aps[0];
     int k;
@@ -631,7 +632,7 @@ void grapheOV::ordonnancement(int *&fs, int*&tab)
 
 }
 
-grapheOV* grapheOV::Critique(int* &lc, int* &fpc, int*& appc, int *coutotal)
+grapheov* grapheov::Critique(int* &lc, int* &fpc, int*& appc, int *coutotal)
 {
     int*fs;
 
@@ -642,7 +643,7 @@ grapheOV* grapheOV::Critique(int* &lc, int* &fpc, int*& appc, int *coutotal)
     int*aps = graphe::fs2aps(fs);
 
     int *fp;
-    fp = grapheOV::fs2fp_(fs);
+    fp = grapheov::fs2fp_(fs);
 
     int *app = graphe::fs2aps(fp);
     int n = app[0];
@@ -726,17 +727,8 @@ grapheOV* grapheOV::Critique(int* &lc, int* &fpc, int*& appc, int *coutotal)
     lc[0] = n;
     appc[0] = n;
 
-    /*int *chemin = new int [n+1];
-    int cpt=1;
-    int s =n;
-    chemin[cpt++]=s;
-    while ((s=fpc[appc[s]]) != 0)
-    {
-    chemin[cpt++]=s;
-    }
-    chemin[0]=cpt-1;*/
 
-    return new grapheOV(fs, aps, c);
+    return new grapheov(fs, aps, c);
 
 }
 

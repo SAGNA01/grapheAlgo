@@ -2,11 +2,11 @@
 #define GRAPHEONV_H
 #include "graphe.h"
 
-class grapheONV : public graphe
+class grapheonv : public graphe
 {
 public:
-    grapheONV();
-    grapheONV(int *fs, int *aps);
+    grapheonv();
+    grapheonv(int *fs, int *aps);
 
     //retourne le nb de pred de chaque sommet
     int* nb_pred() const;

@@ -23,9 +23,9 @@ arc::arc(sommet *sommet1, sommet *sommet2, bool oriente, QGraphicsScene* parent)
 
 }
 
-arc::getSommetDep() const{
+int arc::getSommetDep() const{
     return sommet_dep;
 }
-arc::getSommetArr() const{
+int arc::getSommetArr() const{
     return sommet_arr;
 }

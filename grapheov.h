@@ -4,13 +4,13 @@
 
 using namespace std;
 
-class grapheOV : public graphe
+class grapheov : public graphe
 {
 public:
-    grapheOV();
+    grapheov();
     //création d'un graphe à partir de la file des successeurs
-    grapheOV(int *fs, int *aps, int **couts);
-    virtual ~grapheOV();
+    grapheov(int *fs, int *aps, int **couts);
+    virtual ~grapheov();
 
 
     //affichage avec la matrice des couts
@@ -48,7 +48,7 @@ public:
 
     bool circuit(int* fs, int* aps, int* statut, int s);
 
-    grapheOV* Critique(int* &lc, int* &fpc, int*& appc, int*coutotal);
+    grapheov* Critique(int* &lc, int* &fpc, int*& appc, int*coutotal);
     void ordonnancement(int *&fs, int *&num);
 
     //retourn la file des pred a partir de la file des successeurs

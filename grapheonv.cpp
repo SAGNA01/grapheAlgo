@@ -1,12 +1,12 @@
 #include "grapheonv.h"
 
-grapheONV::grapheONV() : graphe{}
+grapheonv::grapheonv() : graphe{}
 {}
 
-grapheONV::grapheONV(int *fs, int *aps) : graphe{fs, aps}
+grapheonv::grapheonv(int *fs, int *aps) : graphe{fs, aps}
 {}
 
-int* grapheONV::nb_pred() const
+int* grapheonv::nb_pred() const
 {
     int n = d_aps[0];
     int *ddi = new int[n + 1];
@@ -22,7 +22,7 @@ int* grapheONV::nb_pred() const
     return ddi;
 }
 
-int* grapheONV::dist(int s) const
+int* grapheonv::dist(int s) const
 {
     int n = d_aps[0], v = 0, t = 0, q = 1, p = 1;
     int *d = new int[n + 1];
@@ -59,7 +59,7 @@ int* grapheONV::dist(int s) const
     return d;
 }
 
-int* grapheONV::rang(int *&pilch, int *&prem) const
+int* grapheonv::rang(int *&pilch, int *&prem) const
 {
     int n = d_aps[0];
     int s, k, t, h;
@@ -115,7 +115,7 @@ int* grapheONV::rang(int *&pilch, int *&prem) const
     return rang;
 }
 
-int* grapheONV::fs2fp() const
+int* grapheonv::fs2fp() const
 {
     int *ddi = nb_pred();
 
@@ -149,7 +149,7 @@ int* grapheONV::fs2fp() const
     return fp;
 }
 
-int* grapheONV::det_pred() const
+int* grapheonv::det_pred() const
 {
     int *pilch, *prem;
     int* rg = rang(pilch, prem);
@@ -169,7 +169,7 @@ int* grapheONV::det_pred() const
 }
 
 //si che[0]==0 => pas de chemin
-int* grapheONV::chemin(int s) const
+int* grapheonv::chemin(int s) const
 {
 
     int* pred = det_pred();
@@ -194,7 +194,7 @@ int* grapheONV::chemin(int s) const
     return che;
 }
 
-void grapheONV::Tarjan(int **dist,int *&cfc, int *&prem, int *&pilch)
+void grapheonv::Tarjan(int **dist,int *&cfc, int *&prem, int *&pilch)
 {
     int  nb = 0, l;
     dist[0][0] = nb;

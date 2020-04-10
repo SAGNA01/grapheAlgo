@@ -1,29 +1,29 @@
 #include "graphenonv.h"
 
 
-grapheNONV::grapheNONV() : graphe{}
+graphenonv::graphenonv() : graphe{}
 {}
 
-grapheNONV::grapheNONV(int **adj) : graphe{adj}
+graphenonv::graphenonv(int **adj) : graphe{adj}
 {
     dedoublerAretes();
 }
 
-grapheNONV::grapheNONV(int *fs, int *aps) :graphe{fs, aps}
+graphenonv::graphenonv(int *fs, int *aps) :graphe{fs, aps}
 {
     dedoublerAretes();
 }
 
-grapheNONV::~grapheNONV()
+graphenonv::~graphenonv()
 {}
 
-void grapheNONV::ajoutArc(int s1, int s2, int c)
+void graphenonv::ajoutArc(int s1, int s2, int c)
 {
     graphe::ajoutArc(s1, s2);
     graphe::ajoutArc(s2, s1);
 }
 
-void grapheNONV::dedoublerAretes()
+void graphenonv::dedoublerAretes()
 {
     if (d_aps == nullptr || d_fs == nullptr)
         return;
@@ -37,13 +37,13 @@ void grapheNONV::dedoublerAretes()
             ajoutArc(d_fs[i], sommet, 0);
 }
 
-void grapheNONV::supprArc(int s1, int s2)
+void graphenonv::supprArc(int s1, int s2)
 {
     graphe::supprArc(s1, s2);
     graphe::supprArc(s2, s1);
 }
 
-bool grapheNONV::est_arbre(int *&d)
+bool graphenonv::est_arbre(int *&d)
 {
     if (d_fs == nullptr || d_aps == nullptr)
     {
@@ -96,7 +96,7 @@ bool grapheNONV::est_arbre(int *&d)
     return (compteur == n);
 }
 
-int** grapheNONV::decodage(int *d)
+int** graphenonv::decodage(int *d)
 {
 
     int n = d[0];

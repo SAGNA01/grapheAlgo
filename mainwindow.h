@@ -11,10 +11,10 @@
 
 #include "wgraphe.h"
 #include "graphe.h"
-#include "grapheOV.h"
-#include "grapheNONV.h"
-#include "grapheNOV.h"
-#include "grapheONV.h"
+#include "grapheov.h"
+#include "graphenonv.h"
+#include "graphenov.h"
+#include "grapheonv.h"
 
 namespace Ui {
 class MainWindow;

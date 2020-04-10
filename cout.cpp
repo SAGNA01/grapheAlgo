@@ -19,11 +19,11 @@ void Couts::mouseListener(QGraphicsSceneMouseEvent *e){
             int rep = QInputDialog::getInt(nullptr, QString("Cout"), QString("Cout de l'arc en Km:"), d_cout, -9999, 9999, 1, &ok);
             if (ok)
             {
-                grapheOV *gOV = nullptr;
-                grapheNOV * gNOV = nullptr;
+                grapheov *gOV = nullptr;
+                graphenov * gNOV = nullptr;
 
-                gOV = dynamic_cast<grapheOV *>(graph->getGCourant());
-                gNOV = dynamic_cast<grapheNOV *>(graph->getGCourant());
+                gOV = dynamic_cast<grapheov *>(graph->getGCourant());
+                gNOV = dynamic_cast<graphenov *>(graph->getGCourant());
 
 
                 int **couts = nullptr;

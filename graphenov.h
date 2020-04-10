@@ -3,13 +3,13 @@
 #include "graphe.h"
 
 
-class grapheNOV : public graphe
+class graphenov : public graphe
 {
 public:
-    grapheNOV();
+    graphenov();
     //création d'un grapheNONV à partir dde la file des successeurs
-    grapheNOV(int *fs, int *aps, int **cout);
-    virtual ~grapheNOV();
+    graphenov(int *fs, int *aps, int **cout);
+    virtual ~graphenov();
 
     //affichage avec la matrice des couts
     virtual void afficher() const;

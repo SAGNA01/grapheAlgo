@@ -1,9 +1,10 @@
 #include "graphenov.h"
+#include<limits.h>
 
-grapheNOV::grapheNOV() : graphe{}, d_cout{nullptr}
+graphenov::graphenov() : graphe{}, d_cout{nullptr}
 {}
 
-grapheNOV::grapheNOV(int *fs, int *aps, int **cout) :
+graphenov::graphenov(int *fs, int *aps, int **cout) :
 graphe{fs, aps}
 {
     if (fs == nullptr || aps == nullptr)
@@ -26,7 +27,7 @@ graphe{fs, aps}
     dedoublerAretes();
 }
 
-grapheNOV::~grapheNOV()
+graphenov::~graphenov()
 {
     int n = nbSommet();
     if (n != 0)
@@ -35,7 +36,7 @@ grapheNOV::~grapheNOV()
     delete d_cout;
 }
 
-void grapheNOV::afficher() const
+void graphenov::afficher() const
 {
     graphe::afficher();
     int n = nbSommet();
@@ -53,7 +54,7 @@ void grapheNOV::afficher() const
     }
 }
 
-int** grapheNOV::Cout() const
+int** graphenov::Cout() const
 {
     if (d_cout == nullptr)
         return nullptr;
@@ -71,7 +72,7 @@ int** grapheNOV::Cout() const
     return c;
 }
 
-bool grapheNOV::setCout(int **cout)
+bool graphenov::setCout(int **cout)
 {
     if (cout == nullptr)
     {
@@ -100,7 +101,7 @@ bool grapheNOV::setCout(int **cout)
     return true;
 }
 
-void grapheNOV::ajoutArc(int s1, int s2, int c)
+void graphenov::ajoutArc(int s1, int s2, int c)
 {
     graphe::ajoutArc(s1, s2);
     graphe::ajoutArc(s2, s1);
@@ -112,7 +113,7 @@ void grapheNOV::ajoutArc(int s1, int s2, int c)
     d_cout[s1][s2] = d_cout[s2][s1] = c;
 }
 
-void grapheNOV::supprArc(int s1, int s2)
+void graphenov::supprArc(int s1, int s2)
 {
     graphe::supprArc(s1, s2);
     graphe::supprArc(s2, s1);
@@ -124,7 +125,7 @@ void grapheNOV::supprArc(int s1, int s2)
     d_cout[s1][s2] = d_cout[s2][s1] = INT_MAX;
 }
 
-void grapheNOV::ajoutSommet()
+void graphenov::ajoutSommet()
 {
     int n = nbSommet();
 
@@ -164,7 +165,7 @@ void grapheNOV::ajoutSommet()
     setCout(cout);
 }
 
-void grapheNOV::supprSommet(int s)
+void graphenov::supprSommet(int s)
 {
     graphe::supprSommet(s);
 
@@ -204,7 +205,7 @@ void grapheNOV::supprSommet(int s)
 
     setCout(cout);
 }
-void grapheNOV::dedoublerAretes()
+void graphenov::dedoublerAretes()
 {
     if (d_aps == nullptr || d_fs == nullptr)
         return;
@@ -218,7 +219,7 @@ void grapheNOV::dedoublerAretes()
 }
 
 
-void grapheNOV::Kruskal(int **&arrete)
+void graphenov::Kruskal(int **&arrete)
 {
     int n = d_aps[0];
     int s;
@@ -312,7 +313,7 @@ void grapheNOV::Kruskal(int **&arrete)
     }
 }
 
-bool grapheNOV::Dijkstra(int s, int* &d, int* &pere) const
+bool graphenov::Dijkstra(int s, int* &d, int* &pere) const
 {
     int MAXPOIDS = INT_MAX;
     int n = d_aps[0];
@@ -380,7 +381,7 @@ bool grapheNOV::Dijkstra(int s, int* &d, int* &pere) const
 
 }
 
-int grapheNOV::dmin(bool* ins, int *d) const
+int graphenov::dmin(bool* ins, int *d) const
 {
     int n = d_aps[0];
     int s = -1;

@@ -112,10 +112,8 @@ MainWindow::MainWindow() : fichier(nullptr), graph(nullptr), apropos(nullptr), b
     dockLayout->addWidget(btnAjouteSommet);
     dockLayout->addWidget(btnSupprSommet);
     dockLayout->addWidget(btnAjoutArc);
-    // dockLayout->addWidget(quitter);
     dockLayout->addWidget(btnSupprArc);
     dockLayout->insertSpacing(6, 20);
-    //dockLayout->addWidget(enregistrement);
     dockwid->setLayout(dockLayout);
 
 
@@ -234,26 +232,26 @@ void MainWindow::chargerGraphe()
         wid->complexe[i] = tmp.c_str();
     }
 
-    grapheOV *gOV = dynamic_cast<grapheOV *>(gcourant);
+    grapheov *gOV = dynamic_cast<grapheov *>(gcourant);
     if (gOV != nullptr)
     {
         bcxValue->setCheckState(Qt::Checked);
         bcxOriente->setCheckState(Qt::Checked);
     }
 
-    grapheNONV *gNONV = dynamic_cast<grapheNONV *>(gcourant);
+    graphenonv *gNONV = dynamic_cast<graphenonv *>(gcourant);
     if (gNONV != nullptr)
     {
         bcxValue->setCheckState(Qt::Unchecked);
         bcxOriente->setCheckState(Qt::Unchecked);
     }
-    grapheNOV *gNOV = dynamic_cast<grapheNOV *>(gcourant);
+    graphenov *gNOV = dynamic_cast<graphenov *>(gcourant);
     if (gNOV != nullptr)
     {
         bcxValue->setCheckState(Qt::Checked);
         bcxOriente->setCheckState(Qt::Unchecked);
     }
-    grapheONV *gONV = dynamic_cast<grapheONV *>(gcourant);
+    grapheonv *gONV = dynamic_cast<grapheonv *>(gcourant);
     if (gONV != nullptr)
     {
         bcxValue->setCheckState(Qt::Unchecked);
@@ -309,7 +307,7 @@ void MainWindow::nouveauGraphe()
 
     if (item == "Orienté Valué")
     {
-        wid->gcourant = new grapheOV();
+        wid->gcourant = new grapheov();
         bcxValue->setCheckState(Qt::Checked);
         wid->value = true;
         bcxOriente->setCheckState(Qt::Checked);
@@ -317,7 +315,7 @@ void MainWindow::nouveauGraphe()
     }
     else if (item == "Orienté Non Valué")
     {
-        wid->gcourant = new grapheONV();
+        wid->gcourant = new grapheonv();
         bcxValue->setCheckState(Qt::Unchecked);
         bcxOriente->setCheckState(Qt::Checked);
         wid->value = false;
@@ -326,7 +324,7 @@ void MainWindow::nouveauGraphe()
     }
     else if (item == "Non Orienté Valué")
     {
-        wid->gcourant = new grapheNOV();
+        wid->gcourant = new graphenov();
         bcxValue->setCheckState(Qt::Checked);
         bcxOriente->setCheckState(Qt::Unchecked);
         wid->value = true;
@@ -334,7 +332,7 @@ void MainWindow::nouveauGraphe()
     }
     else
     {
-        wid->gcourant = new grapheNONV();
+        wid->gcourant = new graphenonv();
         bcxValue->setCheckState(Qt::Unchecked);
         bcxOriente->setCheckState(Qt::Unchecked);
         wid->value = false;
@@ -442,10 +440,10 @@ void MainWindow::dessinerDijkstra()
 {
     wid->dessiner();
 
-    grapheOV *gOV = nullptr;
-    grapheNOV *gNOV = nullptr;
-    gOV = dynamic_cast<grapheOV *>(wid->gcourant);
-    gNOV = dynamic_cast<grapheNOV *>(wid->gcourant);
+    grapheov *gOV = nullptr;
+    graphenov *gNOV = nullptr;
+    gOV = dynamic_cast<grapheov *>(wid->gcourant);
+    gNOV = dynamic_cast<graphenov *>(wid->gcourant);
 
     if (gOV == nullptr && gNOV == nullptr)
     {
@@ -477,10 +475,10 @@ void MainWindow::dessinerTarjan()
 {
     wid->dessiner();
 
-    //grapheOV *gOV = nullptr;
-    grapheONV *gONV = nullptr;
-   // gOV = dynamic_cast<grapheOV *>(wid->gcourant);
-    gONV = dynamic_cast<grapheONV *>(wid->gcourant);
+    //grapheov *gOV = nullptr;
+    grapheonv *gONV = nullptr;
+   // gOV = dynamic_cast<grapheov *>(wid->gcourant);
+    gONV = dynamic_cast<grapheonv *>(wid->gcourant);
 
     if (gONV == nullptr)
     {
@@ -545,10 +543,10 @@ void MainWindow::afficherMatriceCouts()
     if (wid->gcourant == nullptr)
         return;
 
-    grapheOV *gOV = nullptr;
-    gOV = dynamic_cast<grapheOV *>(wid->gcourant);
-    grapheNOV *gNOV = nullptr;
-    gNOV = dynamic_cast<grapheNOV *>(wid->gcourant);
+    grapheov *gOV = nullptr;
+    gOV = dynamic_cast<grapheov *>(wid->gcourant);
+    graphenov *gNOV = nullptr;
+    gNOV = dynamic_cast<graphenov *>(wid->gcourant);
 
     if (gNOV == nullptr && gOV == nullptr)
     {
@@ -597,8 +595,8 @@ void MainWindow::rang()
     if (wid->gcourant == nullptr)
         return;
 
-    grapheOV *gOV = dynamic_cast<grapheOV *>(wid->gcourant);
-    grapheONV *gONV = dynamic_cast<grapheONV *>(wid->gcourant);
+    grapheov *gOV = dynamic_cast<grapheov *>(wid->gcourant);
+    grapheonv *gONV = dynamic_cast<grapheonv *>(wid->gcourant);
 
     if (gOV == nullptr && gONV == nullptr)
     {
@@ -635,9 +633,9 @@ void MainWindow::distances()
     if (wid->gcourant == nullptr)
         return;
 
-    grapheOV *gOV = dynamic_cast<grapheOV *>(wid->gcourant);
-    grapheONV *gONV = dynamic_cast<grapheONV *>(wid->gcourant);
-    //grapheNOV *gNOV = dynamic_cast<grapheNOV *>(wid->gcourant) ;
+    grapheov *gOV = dynamic_cast<grapheov *>(wid->gcourant);
+    grapheov *gONV = dynamic_cast<grapheov *>(wid->gcourant);
+    //graphenov *gNOV = dynamic_cast<graphenov *>(wid->gcourant) ;
 
     if (gOV == nullptr && gONV == nullptr /*&& gNOV == nullptr*/)
     {
@@ -647,7 +645,7 @@ void MainWindow::distances()
     int *dist = nullptr;
     int n = wid->gcourant->nbSommet();
     bool ok;
-    int rep = rep = QInputDialog::getInt(nullptr, QString("Distances"), QString("Calcul des distances pour le sommet ? :"), 1, 1, n, 1, &ok);
+    int rep = QInputDialog::getInt(nullptr, QString("Distances"), QString("Calcul des distances pour le sommet ? :"), 1, 1, n, 1, &ok);
 
     if (!ok)
         return;
@@ -684,8 +682,8 @@ void MainWindow::coderPrufer()
     if (wid->gcourant == nullptr)
         return;
 
-    grapheNONV *gNONV = nullptr;
-    gNONV = dynamic_cast<grapheNONV *>(wid->gcourant);
+    graphenonv *gNONV = nullptr;
+    gNONV = dynamic_cast<graphenonv *>(wid->gcourant);
 
     if (gNONV == nullptr)
     {
@@ -726,7 +724,7 @@ void MainWindow::dessinerKruskal()
         return;
 
     int **arete = nullptr;
-    grapheNOV * gNOV = dynamic_cast<grapheNOV *>(wid->gcourant);
+    graphenov * gNOV = dynamic_cast<graphenov *>(wid->gcourant);
     if (gNOV == nullptr)
     {
         QMessageBox::information(this, "Algorithme de Kruskal", "L' algo de Kruskal ne s'execute que sur un graphe non-orienté et valué", QMessageBox::Ok);

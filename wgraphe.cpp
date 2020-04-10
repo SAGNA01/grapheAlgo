@@ -2,8 +2,8 @@
 #include "sommet.h"
 #include "arc.h"
 #include "cout.h"
-#include "grapheOV.h"
-#include "grapheNOV.h"
+#include "grapheov.h"
+#include "graphenov.h"
 #include "graphenonv.h"
 
 #include <QInputDialog>
@@ -83,8 +83,8 @@ void wgraphe::dessiner()
         aps = gcourant->aps();
     int m = 0;
     int **cou = nullptr;
-    grapheOV *gOV = dynamic_cast<grapheOV *>(gcourant);
-    grapheNOV *gNOV = dynamic_cast<grapheNOV *>(gcourant);
+    grapheov *gOV = dynamic_cast<grapheov *>(gcourant);
+    graphenov *gNOV = dynamic_cast<graphenov *>(gcourant);
 
     if (value)
         if (gOV != nullptr)
@@ -229,8 +229,8 @@ void wgraphe::creerPrufer()
         tab[i] = table->item(0, i - 1)->text().toInt();
     }
 
-    int** adj = grapheNONV::decodage(tab);
-    grapheNONV *gNONV = new grapheNONV(adj);
+    int** adj = graphenonv::decodage(tab);
+    graphenonv *gNONV = new graphenonv(adj);
 
     setGraphe(gNONV);
     prufer->close();
@@ -249,7 +249,7 @@ void wgraphe::ordonnancement()
     if (gcourant == NULL)
         return;
 
-    grapheOV *gOV = dynamic_cast<grapheOV *>(gcourant);
+    grapheov *gOV = dynamic_cast<grapheov *>(gcourant);
     if (gOV == NULL)
     {
         QMessageBox::information(this, "Ordonnancement", "L'ordonnancement ne s'execute que sur un graphe orienté et valué", QMessageBox::Ok);
@@ -336,7 +336,7 @@ void wgraphe::creerOrdo()
         fp[cptfp++] = 0;
     }
 
-    int *fs = grapheOV::fs2fp_(fp);
+    int *fs = grapheov::fs2fp_(fp);
     int **dcout = new int*[n + 1];
     dcout[0] = new int[1];
     for (int i = 1; i <= n; ++i)
@@ -357,7 +357,7 @@ void wgraphe::creerOrdo()
     w->close();
     delete gcourant;
     int *aps = graphe::fs2aps(fs);
-    grapheOV *gOV = new grapheOV(fs, aps, dcout);
+    grapheov *gOV = new grapheov(fs, aps, dcout);
     int *lc, *fpc, *appc;
     gcourant = gOV->Critique(lc, fpc, appc, cout);
     complexe.resize(gcourant->nbSommet());

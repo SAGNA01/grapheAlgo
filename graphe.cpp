@@ -1,10 +1,13 @@
 #include "graphe.h"
 #include "liste.h"
-#include "grapheOV.h"
-#include "grapheNOV.h"
-#include "grapheNONV.h"
-#include "grapheONV.h"
+#include "grapheov.h"
+#include "graphenov.h"
+#include "graphenonv.h"
+#include "grapheonv.h"
+#include "limits.h"
 #include<typeinfo>
+#include<cstring>
+using namespace std;
 
 graphe::graphe() : d_fs{nullptr}, d_aps{nullptr}
 {}
@@ -424,9 +427,9 @@ graphe* graphe::lire(std::ifstream &is)
     }
 
     if (n2 == 1)
-        return new grapheONV(fs, aps);
+        return new grapheonv(fs, aps);
     else if (n2 == 4)
-        return new grapheNONV(fs, aps);
+        return new graphenonv(fs, aps);
     //si graphe value on lit la matrice des couts
     else if (n2 == 2 || n2 == 3)
     {
@@ -448,9 +451,9 @@ graphe* graphe::lire(std::ifstream &is)
             }
 
         if (n2 == 3)
-            return new grapheNOV(fs, aps, cout);
+            return new graphenov(fs, aps, cout);
         if (n2 == 2)
-            return new grapheOV(fs, aps, cout);
+            return new grapheov(fs, aps, cout);
 
     }
     return nullptr;
@@ -463,22 +466,22 @@ bool graphe::ecrire(graphe& g, std::ofstream &ost)
 
     int n2=0;
 
-    if (typeid(g) == typeid(grapheONV))
+    if (typeid(g) == typeid(grapheonv))
     {
         n2 = 1;
         ost << n2;
     }
-    else if (typeid(g) == typeid(grapheOV))
+    else if (typeid(g) == typeid(grapheov))
     {
         n2 = 2;
         ost << n2;
     }
-    else if (typeid(g) == typeid(grapheNOV))
+    else if (typeid(g) == typeid(graphenov))
     {
         n2 = 3;
         ost << n2;
     }
-    else if (typeid(g) == typeid(grapheNONV))
+    else if (typeid(g) == typeid(graphenonv))
     {
         n2 = 4;
         ost << n2;
@@ -502,9 +505,9 @@ bool graphe::ecrire(graphe& g, std::ofstream &ost)
         int **d_cout;
 
         if (n2 == 3)
-            d_cout = static_cast<grapheNOV*>(&g)->Cout();
+            d_cout = static_cast<graphenov*>(&g)->Cout();
         if (n2 == 2)
-            d_cout = static_cast<grapheOV*>(&g)->Cout();
+            d_cout = static_cast<grapheov*>(&g)->Cout();
 
         n = d_cout[0][0];
         m = d_cout[0][1];
